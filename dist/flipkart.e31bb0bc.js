@@ -118,7 +118,31 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   return newRequire;
 })({"index.js":[function(require,module,exports) {
-console.log('hello world');
+document.addEventListener("DOMContentLoaded", function () {
+  (function () {
+    function generateRow(product) {
+      debugger;
+      return "<div class=\"listing-row\">\n            <div class=\"listing-image-block\">\n              <img src=\"".concat(product.product_meta.img, "\" class=\"listing-img\" alt=\"").concat(product.product_meta.title, "\" />\n            </div>\n            <div class=\"listing-title-block\">\n              <div class=\"listing-title\">\n                ").concat(product.product_meta.title, "\n              </div>\n              <div class=\"listing-price-block\">\n                <div class=\"listing-prices\">\n                  <span>\n                    ").concat(product.pricing.selling_price, "\n                  </span>\n                  <span>\n                    ").concat(product.pricing.mrp, "\n                  </span>\n                </div>\n              </div>\n            </div>\n        </div>");
+    }
+
+    fetch('https://flipkart-cart-mock.now.sh/').then(function (response) {
+      return response.json();
+    }).then(function (data) {
+      console.log('The data fetched from the API is: ' + data);
+      console.table(data);
+      var listingsContainer = document.getElementById('listings-footer');
+      console.log(listingsContainer);
+      var allProducts = data;
+      var rowToBeAdded = '';
+      allProducts.map(function (product) {
+        rowToBeAdded = generateRow(product);
+        var div = document.createElement('div');
+        div.innerHTML = rowToBeAdded;
+        listingsContainer.parentNode.insertBefore(div, listingsContainer);
+      });
+    });
+  })();
+});
 },{}],"../../.nvm/versions/node/v8.12.0/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';

@@ -7,6 +7,44 @@
   background-color: #EFEFEF; 
 }
 
+.section-heading {
+  color: gray;
+  padding-bottom: 4px;
+  border-bottom: 1px solid lightgray;
+}
+
+.listings-image-block {
+  margin: 10px;
+  padding: 10px;
+}
+
+.listing-title-block {
+  display: flex;
+  flex-direction: column !important; 
+}
+
+
+.listing-title-block {
+  padding-left: 20px;
+}
+
+.listing-row {
+  padding: 10px;
+}
+
+.listings-listed {
+  width: 100%;
+}
+
+.listings-listed div {
+  display: flex;
+  flex-direction: row;
+}
+
+.listing-img {
+  height: 100px;
+}
+
 .heading-container {
   background-color: #EFEFEF; 
 }
@@ -20,9 +58,10 @@
 
 .listings {
   background-color: white;
-  height: 200px;
+  height: 600px;
   width: 940px;
   margin: 10px;
+  padding: 10px;
 }
 
 .cartDetails {
@@ -30,4 +69,5 @@
   margin: 10px;
   background-color: white;
   height: 200px;
+  padding: 10px;
 }
