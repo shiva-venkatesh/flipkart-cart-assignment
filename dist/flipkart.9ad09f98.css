@@ -1,0 +1,35 @@
+.page-heading {
+  color: steelblue;
+  padding: 10px;
+}
+
+.app {
+  background-color: #EFEFEF; 
+}
+
+.heading-container {
+  background-color: #EFEFEF; 
+}
+
+.app-container {
+  background-color: #EFEFEF;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.listings {
+  background-color: white;
+  height: 200px;
+  width: 940px;
+  margin: 10px;
+}
+
+.cartDetails {
+  width: 480px;
+  margin: 10px;
+  background-color: white;
+  height: 200px;
+}
+
+/*# sourceMappingURL=/flipkart.9ad09f98.css.map */
