@@ -7,6 +7,10 @@
   background-color: #EFEFEF; 
 }
 
+.amount-payable-block, .delivery-price-block, .preview-price-block {
+  margin: 10px !important;
+}
+
 .section-heading {
   color: gray;
   padding-bottom: 4px;
@@ -17,6 +21,14 @@
   margin: 10px;
   padding: 10px;
 }
+
+#preview-price {
+  float: right;
+}
+
+#preview-price-title {
+  float: left
+} 
 
 .listing-title-block {
   display: flex;
@@ -38,7 +50,7 @@
 .listing-image-block {
   width: 100px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column !important;
   justify-content: center;
 }
 
@@ -61,6 +73,14 @@
 
 .listing-img {
   height: 100px;
+}
+
+.counterButton {
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  border: none;
+  cursor:pointer;
+  overflow: hidden;   
 }
 
 .heading-container {

@@ -119,10 +119,47 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   return newRequire;
 })({"index.js":[function(require,module,exports) {
 document.addEventListener("DOMContentLoaded", function () {
+  window.cartItems = [];
+  window.amountPayable = 0;
+
   (function () {
+    window.addToCart = function (productID) {
+      console.log('clicked add : ' + productID);
+      var productToBeAdded = allProducts.find(function (product) {
+        return product.product_id === productID;
+      });
+
+      if (cartItems.find(function (product) {
+        return product.product_id === productID;
+      })) {
+        window.amountPayable = window.amountPayable + productToBeAdded.pricing.mrp;
+      } else {
+        window.amountPayable = window.amountPayable + productToBeAdded.pricing.mrp + productToBeAdded.pricing.delivery_charge;
+      }
+
+      document.getElementById('amount-final').innerHTML = window.amountPayable;
+    };
+
+    window.removeFromCart = function (productID) {
+      var prodID = productID.substring(0, productID.length - 3);
+      console.log('clicked remove : ' + prodID);
+      var productToBeRemoved = allProducts.find(function (product) {
+        return product.product_id === prodID;
+      });
+
+      if (cartItems.find(function (product) {
+        return product.product_id === prodID;
+      })) {
+        window.amountPayable = window.amountPayable - productToBeRemoved.pricing.mrp;
+      } else {
+        window.amountPayable = window.amountPayable - productToBeRemoved.pricing.mrp - productToBeRemoved.pricing.delivery_charge;
+      }
+
+      document.getElementById('amount-final').innerHTML = window.amountPayable;
+    };
+
     function generateRow(product) {
-      debugger;
-      return "<div class=\"listing-row\">\n            <div class=\"listing-image-block\">\n              <img src=\"".concat(product.product_meta.img, "\" class=\"listing-img\" alt=\"").concat(product.product_meta.title, "\" />\n            </div>\n            <div class=\"listing-title-block\">\n              <div class=\"listing-title\">\n                ").concat(product.product_meta.title, "\n              </div>\n              <div class=\"listing-price-block\">\n                <div class=\"listing-prices\">\n                  <span class=\"prices selling-price\">\n                    \u20B9").concat(product.pricing.selling_price, "\n                  </span>\n                  <span class=\"prices mrp\">\n                    <strike>\u20B9").concat(product.pricing.mrp, "</strike>\n                  </span>\n                </div>\n              </div>\n            </div>\n        </div>");
+      return "<div class=\"listing-row\">\n            <div class=\"listing-image-block\">\n              <div class=\"listing-image-container\">\n                <img src=\"".concat(product.product_meta.img, "\" class=\"listing-img\" alt=\"").concat(product.product_meta.title, "\" />\n              </div>\n              <div class=\"counter-block\">\n                <div class=\"button-block\">\n                  <button class=\"counterButton\" type=\"button\" onclick=\"window.addToCart(this.id)\" id=").concat(product.product_id, ">\n                    +\n                  </button>\n                  <button class=\"counterButton\" type=\"button\" onclick=\"window.removeFromCart(this.id)\" id=").concat(product.product_id, "11\">\n                    -\n                  </button>\n                </div>\n                <div class=\"button-block\">\n                </div>\n              </div>\n            </div>\n            <div class=\"listing-title-block\">\n              <div class=\"listing-title\">\n                ").concat(product.product_meta.title, "\n              </div>\n              <div class=\"listing-price-block\">\n                <div class=\"listing-prices\">\n                  <span class=\"prices selling-price\">\n                    \u20B9").concat(product.pricing.selling_price, "\n                  </span>\n                  <span class=\"prices mrp\">\n                    <strike>\u20B9").concat(product.pricing.mrp, "</strike>\n                  </span>\n                </div>\n              </div>\n            </div>\n        </div>");
     }
 
     fetch('https://flipkart-cart-mock.now.sh/').then(function (response) {
@@ -133,6 +170,18 @@ document.addEventListener("DOMContentLoaded", function () {
       var listingsContainer = document.getElementById('listings-footer');
       console.log(listingsContainer);
       var allProducts = data;
+      var cItems = [];
+      window.allProducts = allProducts;
+      window.amountPayable = 0;
+      allProducts.map(function (product) {
+        cartItem = Object.assign({}, product);
+        cartItem.count = 1;
+        amountPayable = Number(window.amountPayable) + Number(cartItem.pricing.selling_price) * Number(cartItem.count) + Number(cartItem.pricing.delivery_charge);
+        console.log('the amount payable is: ' + window.amountPayable);
+        cItems.push(cartItem);
+      });
+      document.getElementById('amount-final').innerHTML = window.amountPayable;
+      window.cartItems = cItems.slice();
       var rowToBeAdded = '';
       allProducts.map(function (product) {
         rowToBeAdded = generateRow(product);
