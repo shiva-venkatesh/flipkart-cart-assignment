@@ -23,9 +23,20 @@
   flex-direction: column !important; 
 }
 
+.listing-prices {
+  /* padding: 10px; */
+}
+
+.prices {
+  padding: 5px;
+}
 
 .listing-title-block {
   padding-left: 20px;
+}
+
+.mrp {
+  font-size: 14px;
 }
 
 .listing-row {

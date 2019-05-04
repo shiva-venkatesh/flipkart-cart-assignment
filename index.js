@@ -13,11 +13,11 @@ document.addEventListener("DOMContentLoaded", function() {
               </div>
               <div class="listing-price-block">
                 <div class="listing-prices">
-                  <span>
-                    ${product.pricing.selling_price}
+                  <span class="prices selling-price">
+                    ₹${product.pricing.selling_price}
                   </span>
-                  <span>
-                    ${product.pricing.mrp}
+                  <span class="prices mrp">
+                    <strike>₹${product.pricing.mrp}</strike>
                   </span>
                 </div>
               </div>
